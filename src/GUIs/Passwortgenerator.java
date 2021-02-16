@@ -87,6 +87,7 @@ public class Passwortgenerator extends JFrame {
   
   public void bNeuesPasswort_ActionPerformed(ActionEvent evt) {
     //Generiert ein neues Passwort mit der Länge vom Spinner
+    //lol
     tf.setText(createPassword((Integer) sp_length.getValue()));
     
   }
