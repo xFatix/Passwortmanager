@@ -1,6 +1,9 @@
 package GUIs;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.*;
 import java.security.SecureRandom;
 import javax.swing.*;
@@ -21,7 +24,7 @@ public class Passwortgenerator extends JFrame {
   private JButton bKopieren = new JButton();
   private JLabel lEinstellungen = new JLabel();
   private JSpinner sp_length = new JSpinner();
-    private SpinnerNumberModel sp_lengthModel = new SpinnerNumberModel(12, 12, 100, 1);
+  private SpinnerNumberModel sp_lengthModel = new SpinnerNumberModel(12, 12, 100, 1);
   private JLabel lb_length = new JLabel();
   // Ende Attribute
   
@@ -42,7 +45,7 @@ public class Passwortgenerator extends JFrame {
     // Anfang Komponenten
     
     tf.setBounds(14, 6, 358, 36);
-    tf.setText("89");
+    tf.setText("");
     tf.setFont(new Font("Dialog", Font.PLAIN, 14));
     cp.add(tf);
     bNeuesPasswort.setBounds(14, 48, 235, 49);
@@ -85,22 +88,21 @@ public class Passwortgenerator extends JFrame {
     new Passwortgenerator();
   } // end of main
   
-  public void bNeuesPasswort_ActionPerformed(ActionEvent evt) {
+  private void bNeuesPasswort_ActionPerformed(ActionEvent evt) {
     //Generiert ein neues Passwort mit der Länge vom Spinner
-    //lol
     tf.setText(createPassword((Integer) sp_length.getValue()));
-    
   }
 
-  public void bKopieren_ActionPerformed(ActionEvent evt) {
-
+  private void bKopieren_ActionPerformed(ActionEvent evt) {
+    writeTextToClipboard(tf.getText());
   }
 
 
   /*
   Methode von: http://javatricks.de/tricks/passwort-generieren-mit-java
+  Generate new Password
    */
-  public static String createPassword(int length){
+  private static String createPassword(int length){
     final String allowedChars = "0123456789abcdefghijklmnopqrstuvwABCDEFGHIJKLMNOP!§$%&?*+#";
     SecureRandom random = new SecureRandom();
     StringBuilder pass = new StringBuilder(length);
@@ -108,6 +110,17 @@ public class Passwortgenerator extends JFrame {
       pass.append(allowedChars.charAt(random.nextInt(allowedChars.length())));
     }
     return pass.toString();
+  }
+
+
+  /*
+  Methode von: https://alvinalexander.com/blog/post/jfc-swing/how-write-text-string-system-clipboard-java-swing/
+  Copy String to Clipboard
+   */
+  private static void writeTextToClipboard(String s) {
+    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Transferable transferable = new StringSelection(s);
+    clipboard.setContents(transferable, null);
   }
   // Ende Methoden
 } // end of class Passwortgenerator

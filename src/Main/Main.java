@@ -4,6 +4,7 @@ import GUIs.Login;
 import GUIs.Masterpasswort;
 import Utils.DiscordPresence;
 import Utils.MYSQL;
+import Utils.Setup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +21,7 @@ public class Main {
         MYSQL.create_PassTB();
         //Die Folgenden Try-Catch Blöcke erstellen - falls nicht vorhanden - eine Datei welche abspeichert
         // ob die Konfiguration des Masterpasswortes erfolgte oder nicht.
+        /*
         String setupCheck = "";
         try {
             File myObj = new File("setup.txt");
@@ -46,6 +48,13 @@ public class Main {
             while (myReader.hasNextLine()) {
                 setupCheck = myReader.nextLine();
                 System.out.println(setupCheck);
+
+                if(setupCheck.equalsIgnoreCase("0")){
+                    Masterpasswort mp = new Masterpasswort();
+                }else if(setupCheck.equalsIgnoreCase("1")){
+                    Login lg = new Login();
+                }
+
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -60,6 +69,9 @@ public class Main {
         }else if(setupCheck.equalsIgnoreCase("1")){
             Login lg = new Login();
         }
+*/
+        Setup setup = new Setup();
+        setup.checkSetup();
 
         //Discord Richpresence
         DiscordPresence.start();

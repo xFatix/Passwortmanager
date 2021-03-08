@@ -108,8 +108,8 @@ public class NeuerEintrag extends JFrame {
   public static void main(String[] args) {
     new NeuerEintrag();
   } // end of main
-  
-  public void bt_OK_ActionPerformed(ActionEvent evt) {
+
+  private void bt_OK_ActionPerformed(ActionEvent evt) {
     System.out.println(tf_appname.getText());
     System.out.println(tf_username.getText());
     System.out.println(tf_passwort.getText());
@@ -125,7 +125,7 @@ public class NeuerEintrag extends JFrame {
     
   } // end of bt_OK_ActionPerformed
 
-  public void bt_cancel_ActionPerformed(ActionEvent evt) {
+  private void bt_cancel_ActionPerformed(ActionEvent evt) {
     setVisible(false);
     dispose();
     MYSQL.showPasswords();

@@ -19,7 +19,7 @@ public class Login extends JFrame {
   // Anfang Attribute
   private JLabel lb_login = new JLabel();
   private JLabel lMasterpasswort = new JLabel();
-  private JTextField tf_masterpw = new JTextField();
+  private JPasswordField tf_masterpw = new JPasswordField();
   private JButton bt_login = new JButton();
   private JLabel lMarlonMueller2020 = new JLabel();
   private JLabel lBetreuerHerrSchmidt = new JLabel();
@@ -80,8 +80,8 @@ public class Login extends JFrame {
   public static void main(String[] args) {
     new Login();
   } // end of main
-  
-  public void bt_login_ActionPerformed(ActionEvent evt) {
+
+  private void bt_login_ActionPerformed(ActionEvent evt) {
     String pw = HASH.hash(tf_masterpw.getText());
 
     if (pw.equals(MYSQL.getMasterpasswort())){

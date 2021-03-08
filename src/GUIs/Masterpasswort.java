@@ -84,8 +84,8 @@ public class Masterpasswort extends JFrame {
   public static void main(String[] args) {
     new Masterpasswort();
   } // end of main
-  
-  public void bt_login_ActionPerformed(ActionEvent evt) {
+
+  private void bt_login_ActionPerformed(ActionEvent evt) {
     String master = tf_master.getText();
     String master2 = tf_masterRe.getText();
 
@@ -103,6 +103,8 @@ public class Masterpasswort extends JFrame {
         if (master.length() > 8 && upperCase >= 2){
           JOptionPane.showMessageDialog(null, "Masterpasswort erfolgreich hinterlegt!", "Information ", JOptionPane.INFORMATION_MESSAGE);
           MYSQL.setMasterpasswort(master);
+          setVisible(false);
+          dispose();
         }else{
           JOptionPane.showMessageDialog(null, "Das Passwort muss mindestens 9 Zeichen lang sein und 2 Groﬂbuchstaben haben!", "Achtung ", JOptionPane.INFORMATION_MESSAGE);
         }

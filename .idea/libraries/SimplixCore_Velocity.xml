@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="mysql-connector">
+  <library name="SimplixCore-Velocity">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../mysql-connector.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../SimplixCore-Velocity.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

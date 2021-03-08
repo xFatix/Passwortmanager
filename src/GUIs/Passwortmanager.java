@@ -7,6 +7,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.plaf.synth.SynthMenuBarUI;
 import javax.swing.table.*;
 
@@ -28,13 +30,14 @@ public class Passwortmanager extends JFrame {
   private JScrollPane tb_dataScrollPane = new JScrollPane(tb_data);
   private JButton bt_pwc = new JButton();
   private JButton bt_passgen = new JButton();
-  // Ende Attribute      
+  private JButton bt_settings = new JButton();
+  // Ende Attribute
 
   private static boolean allow_NE = false; //NeuerEintrag GUI is open
   private static boolean allow_PC = false; //Passwortchecker GUI is open
 
 
-  public Passwortmanager() { 
+  public Passwortmanager() {
     // Frame-Initialisierung
     super();
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -50,7 +53,9 @@ public class Passwortmanager extends JFrame {
     Container cp = getContentPane();
     cp.setLayout(null);
     // Anfang Komponenten
-    
+
+
+
     setJMenuBar(menubar);
     bt_neuerEintrag.setBounds(25, -6, 91, 25);
     bt_neuerEintrag.setText("Neuer Eintrag");
@@ -107,21 +112,37 @@ public class Passwortmanager extends JFrame {
     menubar.add(bt_passgen);
     tb_data.getTableHeader().setReorderingAllowed(false);
     setVisible(true);
-  } // end of public Passwortmanager
-  
-  // Anfang Methoden
+
+    /*tb_data.getModel().addTableModelListener(new TableModelListener() {
+
+      public void tableChanged(TableModelEvent e) {
+        System.out.println(" ");
+        System.out.println("Row: " + e.getFirstRow());
+        System.out.println("Column: " + e.getColumn());
+        System.out.println("UID: " + tb_dataModel.getValueAt(e.getFirstRow(), 0).toString());
+        System.out.println(tb_dataModel.getValueAt(e.getFirstRow(), e.getColumn()).toString());
+        MYSQL.updateEntry(tb_dataModel.getValueAt(e.getFirstRow(), 0).toString(),
+                tb_dataModel.getValueAt(e.getFirstRow(), 1).toString(),
+                tb_dataModel.getValueAt(e.getFirstRow(), 2).toString(),
+                tb_dataModel.getValueAt(e.getFirstRow(), 3).toString(),
+                tb_dataModel.getValueAt(e.getFirstRow(), 4).toString(),
+                tb_dataModel.getValueAt(e.getFirstRow(), 5).toString());
+      }
+    });*/
+  }
   
   public static void main(String[] args) {
     new Passwortmanager();
+
   } // end of main
   
-  public void bt_neuerEintrag_ActionPerformed(ActionEvent evt) {
+  private void bt_neuerEintrag_ActionPerformed(ActionEvent evt) {
     NeuerEintrag ne = new NeuerEintrag();
     setVisible(false);
     dispose();
-  } // end of bt_neuerEintrag_ActionPerformed
+  }
 
-  public void bt_delEintrag_ActionPerformed(ActionEvent evt) {
+  private void bt_delEintrag_ActionPerformed(ActionEvent evt) {
     if (tb_data.getSelectedRow() != -1){
       Object obj = tb_dataModel.getValueAt(tb_data.getSelectedRow(), 0);
       String value = obj.toString();
@@ -129,18 +150,16 @@ public class Passwortmanager extends JFrame {
       System.out.println(value);
       tb_dataModel.removeRow(tb_data.getSelectedRow());
     }
+  }
 
-  } // end of bt_delEintrag_ActionPerformed
-
-  public void bt_pwc_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
+  private void bt_pwc_ActionPerformed(ActionEvent evt) {
     Passwortchecker checker = new Passwortchecker();
-  } // end of bt_pwc_ActionPerformed
+  }
 
-  public void bt_passgen_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
-    
-  } // end of bt_passgen_ActionPerformed
+  private void bt_passgen_ActionPerformed(ActionEvent evt) {
+    Passwortgenerator pwg = new Passwortgenerator();
+  }
+
 
 }
 

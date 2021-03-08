@@ -1,7 +1,6 @@
 package Main;
 
 import Utils.AES256;
-import Utils.MYSQL;
 
 public class testclass {
 
@@ -13,6 +12,7 @@ public class testclass {
         System.out.println(encrypted);
         System.out.println(decrypt);
 
+        
 
     }
 }
