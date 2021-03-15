@@ -21,6 +21,7 @@ public class DiscordPresence {
         presence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
         lib.Discord_UpdatePresence(presence);
 
+
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()){
                 lib.Discord_RunCallbacks();

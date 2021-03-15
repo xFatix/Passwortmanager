@@ -2,10 +2,10 @@ package GUIs;
 
 import Utils.MYSQL;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -110,15 +110,16 @@ public class NeuerEintrag extends JFrame {
   } // end of main
 
   private void bt_OK_ActionPerformed(ActionEvent evt) {
+    MYSQL mysql = new MYSQL();
     System.out.println(tf_appname.getText());
     System.out.println(tf_username.getText());
     System.out.println(tf_passwort.getText());
 
     if (!tf_appname.getText().equals("") && !tf_username.getText().equals("") && !tf_passwort.getText().equals("")){
-      MYSQL.addEntry(tf_appname.getText(), tf_username.getText(), tf_passwort.getText(), tf_url.getText(), tf_email.getText());
+      mysql.addEntry(tf_appname.getText(), tf_username.getText(), tf_passwort.getText(), tf_url.getText(), tf_email.getText());
       setVisible(false);
       dispose();
-      MYSQL.showPasswords();
+      mysql.showPasswords();
     }else{
       JOptionPane.showMessageDialog(null, "Es muss ein Appname, Username und Passwort angegeben sein!", "Achtung ", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -126,9 +127,10 @@ public class NeuerEintrag extends JFrame {
   } // end of bt_OK_ActionPerformed
 
   private void bt_cancel_ActionPerformed(ActionEvent evt) {
+    MYSQL mysql = new MYSQL();
     setVisible(false);
     dispose();
-    MYSQL.showPasswords();
+    mysql.showPasswords();
   } // end of bt_cancel_ActionPerformed
 
   // Ende Methoden

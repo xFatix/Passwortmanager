@@ -5,7 +5,6 @@ import GUIs.Passwortmanager;
 import de.leonhard.storage.Yaml;
 
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
@@ -13,15 +12,20 @@ import java.util.Vector;
 
 public class MYSQL {
 
-    final static Yaml yaml = new Yaml("settings", "files");
-    final static String ip = AES256.decrypt(yaml.getString("database.ip"));
-    final static String port = AES256.decrypt(yaml.getString("database.port"));
-    final static String username = AES256.decrypt(yaml.getString("database.username"));
-    final static String password = AES256.decrypt(yaml.getString("database.password"));
-    final static String db = AES256.decrypt(yaml.getString("database.db"));
+    Yaml yaml = new Yaml("settings", "files");
+      String ip = AES256.decrypt(yaml.getString("database.ip"));
+      String port = AES256.decrypt(yaml.getString("database.port"));
+      String username = AES256.decrypt(yaml.getString("database.username"));
+      String password = AES256.decrypt(yaml.getString("database.password"));
+      String db = AES256.decrypt(yaml.getString("database.db"));
 
 
-    public static void create_MasterTB() {
+    public void create_MasterTB() {
+        System.out.println(ip);
+        System.out.println(port);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(db);
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -30,14 +34,17 @@ public class MYSQL {
             String sql = "CREATE DATABASE IF NOT EXISTS "+db;
             stmt.executeUpdate(sql);
             sql = "CREATE TABLE IF NOT EXISTS " + db + ".master"+
-                    " (MASTER TEXT)";
+                    " (MID INT NOT NULL AUTO_INCREMENT," +
+                    "MASTER TEXT," +
+                    "PRIMARY KEY (MID));";
             stmt.executeUpdate(sql);
         }catch(Exception e){
             System.out.println(e);
+            System.out.println("1");
         }
     }
 
-    public static void create_PassTB() {
+    public void create_PassTB() {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -55,22 +62,26 @@ public class MYSQL {
                     "PRIMARY KEY (UID)" +
                     ");";
             stmt.executeUpdate(sql);
+            sql = "INSERT INTO "+db+".master (MASTER) VALUES ('123')";
+            stmt.executeUpdate(sql);
         }catch(Exception e){
             System.out.println(e);
+            System.out.println("2");
         }
     }
 
-    public static void setMasterpasswort(String Master){
+    /*public void setMasterpasswort(String Master){
         Master = HASH.hash(Master);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://"+ip+":"+port+"/", username, password);
-            Statement stmt = con.createStatement();
             String sql = "INSERT INTO "+db+".master VALUES ('"+Master+"')";
-            stmt.executeUpdate(sql);
+            Statement stmt = con.prepareStatement(sql);
+
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("3");
         }
 
         try {
@@ -80,30 +91,59 @@ public class MYSQL {
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+            System.out.println("4");
+        }
+        Login lg = new Login();
+    }*/
+
+
+    public void setMasterpasswort(String Master){
+        Master = HASH.hash(Master);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://"+ip+":"+port+"/", username, password);
+            Statement stmt = con.createStatement();
+            String sql = "UPDATE "+db+".master SET master='" + Master + "' WHERE "+db+".master.MID=1";
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("3");
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter("setup.txt");
+            myWriter.write("1");
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            System.out.println("4");
         }
         Login lg = new Login();
     }
 
-    public static String getMasterpasswort(){
+    public String getMasterpasswort(){
         String master = "";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://"+ip+":"+port+"/", username, password);
             Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM "+db+".master";
+            String sql = "SELECT MASTER FROM "+db+".master WHERE "+db+".master.MID=1";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
-                master = rs.getString("mpw");
+                master = rs.getString("master");
             }
             rs.close();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("5");
         }
         return master;
     }
 
-    public static int getPasswordCount(){
+    public int getPasswordCount(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -116,11 +156,12 @@ public class MYSQL {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("6");
         }
         return 0;
     }
 
-    public static void showPasswords(){
+    public void showPasswords(){
         String uid = "";
         String appname = "";
         String user = "";
@@ -175,11 +216,12 @@ public class MYSQL {
             Passwortmanager passwortmanager = new Passwortmanager();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("7");
         }
     }
 
     //Diese Methode wird benutzt um die ausgewählte Reihe aus der Datenbank zulöschen
-    public static void delRow(String value){
+    public void delRow(String value){
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -190,11 +232,12 @@ public class MYSQL {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("8");
         }
     }
 
     //Diese Methode wird benutzt um ein neuen Eintrag in die Datenbank zuerstellen.
-    public static void addEntry(String appname, String user, String pw, String URL, String EMail){
+    public void addEntry(String appname, String user, String pw, String URL, String EMail){
         appname = AES256.encrypt(appname);
         user = AES256.encrypt(user);
         pw = AES256.encrypt(pw);
@@ -210,10 +253,11 @@ public class MYSQL {
             stmt.executeUpdate(sql);
         }catch(Exception e){
             System.out.println(e);
+            System.out.println("9");
         }
     }
 
-    public static void updateEntry(String uid, String appname, String user, String pw, String URL, String EMail){
+    public void updateEntry(String uid, String appname, String user, String pw, String URL, String EMail){
         appname = AES256.encrypt(appname);
         user = AES256.encrypt(user);
         pw = AES256.encrypt(pw);
@@ -229,6 +273,7 @@ public class MYSQL {
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("10");
         }
     }
 

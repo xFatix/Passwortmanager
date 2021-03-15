@@ -2,15 +2,11 @@ package GUIs;
 
 import Utils.MYSQL;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.plaf.synth.SynthMenuBarUI;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -49,6 +45,7 @@ public class Passwortmanager extends JFrame {
     int y = (d.height - getSize().height) / 2;
     setLocation(x, y);
     setTitle("Passwortmanager");
+    setIconImage(new ImageIcon("icon4.png").getImage());
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
@@ -57,9 +54,10 @@ public class Passwortmanager extends JFrame {
 
 
     setJMenuBar(menubar);
-    bt_neuerEintrag.setBounds(25, -6, 91, 25);
+    bt_neuerEintrag.setBounds(25, -6, 200, 25);
     bt_neuerEintrag.setText("Neuer Eintrag");
     bt_neuerEintrag.setMargin(new Insets(2, 2, 2, 2));
+   //bt_neuerEintrag.setIcon(new ImageIcon("icons/shell.png"));
     bt_neuerEintrag.addActionListener(new ActionListener() { 
       public void actionPerformed(ActionEvent evt) { 
         bt_neuerEintrag_ActionPerformed(evt);
@@ -95,6 +93,7 @@ public class Passwortmanager extends JFrame {
       }
     });
     cp.add(bt_pwc);
+
     bt_passgen.setBounds(347, -12, 139, 25);
     bt_passgen.setText("Passwortgenerator");
     bt_passgen.setMargin(new Insets(2, 2, 2, 2));
@@ -104,12 +103,23 @@ public class Passwortmanager extends JFrame {
       }
     });
     cp.add(bt_passgen);
+
+    bt_settings.setBounds(347, -12, 139, 25);
+    bt_settings.setText("Settings");
+    bt_settings.setMargin(new Insets(2, 2, 2, 2));
+    bt_settings.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        bt_settings_ActionPerformed(evt);
+      }
+    });
+    cp.add(bt_settings);
     // Ende Komponenten
 
     menubar.add(bt_neuerEintrag);
     menubar.add(bt_delEintrag);
     menubar.add(bt_pwc);
     menubar.add(bt_passgen);
+    menubar.add(bt_settings);
     tb_data.getTableHeader().setReorderingAllowed(false);
     setVisible(true);
 
@@ -143,10 +153,11 @@ public class Passwortmanager extends JFrame {
   }
 
   private void bt_delEintrag_ActionPerformed(ActionEvent evt) {
+    MYSQL mysql = new MYSQL();
     if (tb_data.getSelectedRow() != -1){
       Object obj = tb_dataModel.getValueAt(tb_data.getSelectedRow(), 0);
       String value = obj.toString();
-      MYSQL.delRow(value);
+      mysql.delRow(value);
       System.out.println(value);
       tb_dataModel.removeRow(tb_data.getSelectedRow());
     }
@@ -158,6 +169,12 @@ public class Passwortmanager extends JFrame {
 
   private void bt_passgen_ActionPerformed(ActionEvent evt) {
     Passwortgenerator pwg = new Passwortgenerator();
+  }
+
+  private void bt_settings_ActionPerformed(ActionEvent evt) {
+    Settings settings = new Settings();
+    setVisible(false);
+    dispose();
   }
 
 
