@@ -123,6 +123,10 @@ public class Passwortgenerator extends JFrame {
     Transferable transferable = new StringSelection(s);
     clipboard.setContents(transferable, null);
   }
+
+
+
+
   // Ende Methoden
 } // end of class Passwortgenerator
 

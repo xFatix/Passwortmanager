@@ -1,12 +1,9 @@
 package Main;
 
-import Utils.AES256;
-import de.leonhard.storage.Yaml;
-
 public class testclass {
 
     public static void main(String[] args) {
-        String abc = "abc";
+       /* String abc = "abc";
         String encrypted = AES256.encrypt(abc);
         String decrypt = AES256.decrypt(encrypted);
         System.out.println(abc);
@@ -14,7 +11,8 @@ public class testclass {
         System.out.println(decrypt);
 
         Yaml yaml = new Yaml("testyaml", "");
-        yaml.set("abc", "lol");
+        yaml.set("abc", "lol");*/
+
 
         
 
