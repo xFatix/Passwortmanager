@@ -164,6 +164,9 @@ public class Settings extends JFrame {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+
+    setVisible(false);
+    dispose();
   } // end of bt_cancel_ActionPerformed
 
   // Ende Methoden
