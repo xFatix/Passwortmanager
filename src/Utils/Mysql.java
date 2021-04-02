@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Vector;
 
-public class MYSQL {
+public class Mysql {
 
     Yaml yaml = new Yaml("settings", "files");
-      String ip = AES256.decrypt(yaml.getString("database.ip"));
-      String port = AES256.decrypt(yaml.getString("database.port"));
-      String username = AES256.decrypt(yaml.getString("database.username"));
-      String password = AES256.decrypt(yaml.getString("database.password"));
-      String db = AES256.decrypt(yaml.getString("database.db"));
+      String ip = Aes.decrypt(yaml.getString("database.ip"));
+      String port = Aes.decrypt(yaml.getString("database.port"));
+      String username = Aes.decrypt(yaml.getString("database.username"));
+      String password = Aes.decrypt(yaml.getString("database.password"));
+      String db = Aes.decrypt(yaml.getString("database.db"));
 
 
     public void create_MasterTB() {
@@ -98,7 +98,7 @@ public class MYSQL {
 
 
     public void setMasterpasswort(String Master){
-        Master = HASH.hash(Master);
+        Master = Hash.hash(Master);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -206,11 +206,11 @@ public class MYSQL {
                 System.out.println(uid + " | " + appname + " | " + user + " | " + pw + " | " + url + " | " + email);
                 Vector row = new Vector();
                 row.add(uid);
-                row.add(AES256.decrypt(appname));
-                row.add(AES256.decrypt(user));
-                row.add(AES256.decrypt(pw));
-                row.add(AES256.decrypt(url));
-                row.add(AES256.decrypt(email));
+                row.add(Aes.decrypt(appname));
+                row.add(Aes.decrypt(user));
+                row.add(Aes.decrypt(pw));
+                row.add(Aes.decrypt(url));
+                row.add(Aes.decrypt(email));
                 Passwortmanager.tb_dataModel.addRow(row);
             }
             Passwortmanager passwortmanager = new Passwortmanager();
@@ -238,11 +238,11 @@ public class MYSQL {
 
     //Diese Methode wird benutzt um ein neuen Eintrag in die Datenbank zuerstellen.
     public void addEntry(String appname, String user, String pw, String URL, String EMail){
-        appname = AES256.encrypt(appname);
-        user = AES256.encrypt(user);
-        pw = AES256.encrypt(pw);
-        URL = AES256.encrypt(URL);
-        EMail = AES256.encrypt(EMail);
+        appname = Aes.encrypt(appname);
+        user = Aes.encrypt(user);
+        pw = Aes.encrypt(pw);
+        URL = Aes.encrypt(URL);
+        EMail = Aes.encrypt(EMail);
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(
@@ -258,11 +258,11 @@ public class MYSQL {
     }
 
     public void updateEntry(String uid, String appname, String user, String pw, String URL, String EMail){
-        appname = AES256.encrypt(appname);
-        user = AES256.encrypt(user);
-        pw = AES256.encrypt(pw);
-        URL = AES256.encrypt(URL);
-        EMail = AES256.encrypt(EMail);
+        appname = Aes.encrypt(appname);
+        user = Aes.encrypt(user);
+        pw = Aes.encrypt(pw);
+        URL = Aes.encrypt(URL);
+        EMail = Aes.encrypt(EMail);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection(

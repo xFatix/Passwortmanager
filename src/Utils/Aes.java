@@ -9,7 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 
-public class AES256 {
+public class Aes {
 
     /*
 

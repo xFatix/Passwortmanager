@@ -1,6 +1,6 @@
 package GUIs;
 
-import Utils.MYSQL;
+import Utils.Mysql;
 
 import javax.swing.*;
 import java.awt.*;
@@ -110,7 +110,7 @@ public class NeuerEintrag extends JFrame {
   } // end of main
 
   private void bt_OK_ActionPerformed(ActionEvent evt) {
-    MYSQL mysql = new MYSQL();
+    Mysql mysql = new Mysql();
     System.out.println(tf_appname.getText());
     System.out.println(tf_username.getText());
     System.out.println(tf_passwort.getText());
@@ -127,7 +127,7 @@ public class NeuerEintrag extends JFrame {
   } // end of bt_OK_ActionPerformed
 
   private void bt_cancel_ActionPerformed(ActionEvent evt) {
-    MYSQL mysql = new MYSQL();
+    Mysql mysql = new Mysql();
     setVisible(false);
     dispose();
     mysql.showPasswords();

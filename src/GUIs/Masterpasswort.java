@@ -1,6 +1,6 @@
 package GUIs;
 
-import Utils.MYSQL;
+import Utils.Mysql;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,7 +89,7 @@ public class Masterpasswort extends JFrame {
   private void bt_login_ActionPerformed(ActionEvent evt) {
     String master = tf_master.getText();
     String master2 = tf_masterRe.getText();
-    MYSQL mysql = new MYSQL();
+    Mysql mysql = new Mysql();
 
     if (!master.equals("") || !master2.equals("")){ //Überprüfung ob die textfelder leer sind. das ! steht für die ver
       if(master.equals(master2)){ //Überprüfung ob der Inhalt der Textfelder gleich ist

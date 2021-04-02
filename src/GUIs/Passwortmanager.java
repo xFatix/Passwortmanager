@@ -1,6 +1,6 @@
 package GUIs;
 
-import Utils.MYSQL;
+import Utils.Mysql;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -153,7 +153,7 @@ public class Passwortmanager extends JFrame {
   }
 
   private void bt_delEintrag_ActionPerformed(ActionEvent evt) {
-    MYSQL mysql = new MYSQL();
+    Mysql mysql = new Mysql();
     if (tb_data.getSelectedRow() != -1){
       Object obj = tb_dataModel.getValueAt(tb_data.getSelectedRow(), 0);
       String value = obj.toString();

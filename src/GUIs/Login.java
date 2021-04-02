@@ -1,7 +1,7 @@
 package GUIs;
 
-import Utils.HASH;
-import Utils.MYSQL;
+import Utils.Hash;
+import Utils.Mysql;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,8 +83,8 @@ public class Login extends JFrame {
   } // end of main
 
   private void bt_login_ActionPerformed(ActionEvent evt) {
-    String pw = HASH.hash(tf_masterpw.getText());
-    MYSQL mysql = new MYSQL();
+    String pw = Hash.hash(tf_masterpw.getText());
+    Mysql mysql = new Mysql();
 
     if (pw.equals(mysql.getMasterpasswort())){
       setVisible(false);

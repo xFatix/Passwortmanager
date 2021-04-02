@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class HASH {
+public class Hash {
     static String salt = "b79465edbb2036fa2cb1f488c01747ab1b808939ac2973d275968c38b00254d2";
     public static String hash(String StringToHash){
         String generatedPassword = null;

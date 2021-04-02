@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SimplixCore-Velocity">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/libaries/SimplixCore-Velocity.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,6 +1,6 @@
 package GUIs;
 
-import Utils.AES256;
+import Utils.Aes;
 import de.leonhard.storage.Yaml;
 
 import javax.swing.*;
@@ -117,11 +117,11 @@ public class ChangeSettings extends JFrame {
 
     public void bt_save_ActionPerformed(ActionEvent evt) {
         Yaml yaml = new Yaml("settings", "files");
-        String ip = AES256.encrypt(tf_ip.getText());
-        String port = AES256.encrypt(tf_port.getText());
-        String username = AES256.encrypt(tf_user.getText());
-        String password = AES256.encrypt(tf_pass.getText());
-        String db = AES256.encrypt(tf_db.getText());
+        String ip = Aes.encrypt(tf_ip.getText());
+        String port = Aes.encrypt(tf_port.getText());
+        String username = Aes.encrypt(tf_user.getText());
+        String password = Aes.encrypt(tf_pass.getText());
+        String db = Aes.encrypt(tf_db.getText());
 
         if (ip != "" || port != "" || username != "" || password != "" || db != ""){
             yaml.set("database.ip", ip);
