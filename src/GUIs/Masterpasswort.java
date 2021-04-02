@@ -42,7 +42,7 @@ public class Masterpasswort extends JFrame {
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
-    setIconImage(new ImageIcon("icon4.png").getImage());
+    setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
     // Anfang Komponenten
     
     lb_master.setBounds(30, 98, 126, 44);

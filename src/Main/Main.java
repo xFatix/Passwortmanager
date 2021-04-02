@@ -1,6 +1,5 @@
 package Main;
 
-import Utils.DiscordPresence;
 import Utils.Setup;
 
 public class Main {
@@ -10,9 +9,6 @@ public class Main {
 
         Setup setup = new Setup();
         setup.checkSetup();
-
-        //Discord Richpresence
-        DiscordPresence.start();
 
     }
 

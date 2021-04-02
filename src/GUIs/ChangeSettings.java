@@ -48,7 +48,7 @@ public class ChangeSettings extends JFrame {
         int y = (d.height - getSize().height) / 2;
         setLocation(x, y);
         setTitle("Settings");
-        setIconImage(new ImageIcon("icon4.png").getImage());
+        setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
         setResizable(false);
         Container cp = getContentPane();
         cp.setLayout(null);

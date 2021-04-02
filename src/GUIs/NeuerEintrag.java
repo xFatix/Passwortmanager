@@ -46,7 +46,7 @@ public class NeuerEintrag extends JFrame {
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
-    setIconImage(new ImageIcon("icon4.png").getImage());
+    setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
     // Anfang Komponenten
 
     tf_passwort.setText("");

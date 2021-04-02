@@ -39,7 +39,7 @@ public class Passwortgenerator extends JFrame {
     int y = (d.height - getSize().height) / 2;
     setLocation(x, y);
     setTitle("Passwortgenerator");
-    setIconImage(new ImageIcon("icon4.png").getImage());
+    setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
@@ -113,11 +113,6 @@ public class Passwortgenerator extends JFrame {
     return pass.toString();
   }
 
-
-  /*
-  Methode von: https://alvinalexander.com/blog/post/jfc-swing/how-write-text-string-system-clipboard-java-swing/
-  Copy String to Clipboard
-   */
   private static void writeTextToClipboard(String s) {
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     Transferable transferable = new StringSelection(s);

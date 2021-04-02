@@ -45,7 +45,7 @@ public class Passwortmanager extends JFrame {
     int y = (d.height - getSize().height) / 2;
     setLocation(x, y);
     setTitle("Passwortmanager");
-    setIconImage(new ImageIcon("icon4.png").getImage());
+    setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);

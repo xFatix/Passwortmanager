@@ -41,7 +41,7 @@ public class Login extends JFrame {
     setResizable(false);
     Container cp = getContentPane();
     cp.setLayout(null);
-    setIconImage(new ImageIcon("icon4.png").getImage());
+    setIconImage(new ImageIcon("src/icons/icon4.png").getImage());
     // Anfang Komponenten
     
     lb_login.setBounds(8, 8, 510, 52);
