@@ -125,8 +125,6 @@ public class Passwortgenerator extends JFrame {
   }
 
 
-
-
   // Ende Methoden
 } // end of class Passwortgenerator
 

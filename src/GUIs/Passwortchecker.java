@@ -24,7 +24,7 @@ public class Passwortchecker extends JFrame {
   private JLabel lDasPasswortistsicher = new JLabel();
   private JButton bt_openLink = new JButton();
   // Ende Attribute
-  
+
   public Passwortchecker() { 
     // Frame-Initialisierung
     super();
@@ -52,7 +52,7 @@ public class Passwortchecker extends JFrame {
     lBewertung.setText("Bewertung:");
     cp.add(lBewertung);
     lDasPasswortistsicher.setBounds(146, 60, 398, 28);
-    lDasPasswortistsicher.setText("Das Passwort ist sicher");
+    lDasPasswortistsicher.setText("");
     cp.add(lDasPasswortistsicher);
 
     bt_openLink.setBounds(13, 113, 190, 35);
@@ -96,7 +96,8 @@ public class Passwortchecker extends JFrame {
 
   private void lb_safe(JLabel label){
     String eingabe = tf_eingabe.getText();
-    String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,10}$";
+    String regex = "^(?=.*[0-9]{2})(?=.*[-+_!@#$%^&*., ?])(?=.*[a-z])(?=.*[A-Z]).{12,10000}$";
+    //Eingabe wird überprüft mit regex auf ein bestimmtes Muster: lower & upper Case, mindestens 6 zeichen, mindestens 2 zahlen
     if (eingabe.matches(regex) && eingabe.length() >= 12){
       label.setText("Das Passwort ist sicher!");
     }else{
@@ -110,7 +111,7 @@ public class Passwortchecker extends JFrame {
     } catch (Exception e) {}
   }
 
-  
-  // Ende Methoden
-} // end of class Passwortchecker
+
+
+}
 
